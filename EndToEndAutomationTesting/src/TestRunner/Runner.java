@@ -8,7 +8,10 @@ import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions( features = "AutomationScenarios"
-        ,glue={"StepDefinition"}
+        ,glue={"StepDefinition"},
+        tags = {"@OrderwithDataTableConcept"}, 
+        plugin = {"com.cucumber.listener.ExtentCucumberFormatter:output/GoogleAutomationReport.html"}
+        //tags = {"@Login, @OrderParameter"}
         )
 public class Runner {
 

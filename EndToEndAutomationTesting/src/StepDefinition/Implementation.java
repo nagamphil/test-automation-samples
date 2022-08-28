@@ -1,5 +1,6 @@
 package StepDefinition;
 import java.io.FileInputStream;
+import java.util.List;
 import java.util.Properties;
 
 import org.openqa.selenium.By;
@@ -7,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import cucumber.api.DataTable;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -36,22 +39,23 @@ public class Implementation {
 		driver.get(objectrepo.getProperty("url"));
 	}
 
-	@When("^Enter the username$")
-	public void enter_the_username() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-		WebElement username = driver.findElement(By.xpath(objectrepo.getProperty("username")));
-		
-		username.sendKeys("Tester");
-		
-	
-	}
-
-	@When("^Enter the password$")
-	public void enter_the_password() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-		WebElement pword = driver.findElement(By.xpath(objectrepo.getProperty("pword")));
-		pword.sendKeys("test");
-	}
+	/*
+	 * @When("^Enter the username$") public void enter_the_username() throws
+	 * Throwable { // Write code here that turns the phrase above into concrete
+	 * actions WebElement username =
+	 * driver.findElement(By.xpath(objectrepo.getProperty("username")));
+	 * 
+	 * username.sendKeys("Tester");
+	 * 
+	 * 
+	 * }
+	 * 
+	 * @When("^Enter the password$") public void enter_the_password() throws
+	 * Throwable { // Write code here that turns the phrase above into concrete
+	 * actions WebElement pword =
+	 * driver.findElement(By.xpath(objectrepo.getProperty("pword")));
+	 * pword.sendKeys("test"); }
+	 */
 
 	@When("^Click the login button$")
 	public void click_the_login_button() throws Throwable {
@@ -120,20 +124,50 @@ public class Implementation {
 	   verify.click();
 
 	}
-	@When("^Enter the username \"([^\"]*)\"$")
-	public void enter_the_username(String usernamedata) throws Throwable {
+
+	/*
+	 * @When("^Enter the username \"([^\"]*)\"$") public void
+	 * enter_the_username(String usernamedata) throws Throwable { // Write code here
+	 * that turns the phrase above into concrete actions
+	 * 
+	 * WebElement username =
+	 * driver.findElement(By.xpath(objectrepo.getProperty("username")));
+	 * 
+	 * username.sendKeys(usernamedata); }
+	 * 
+	 * @When("^Enter the password	\"([^\"]*)\"$") public void
+	 * enter_the_password(String password) throws Throwable { // Write code here
+	 * that turns the phrase above into concrete actions WebElement pword =
+	 * driver.findElement(By.xpath(objectrepo.getProperty("pword")));
+	 * pword.sendKeys(password); }
+	 */
+	@When("^Enter the username$")
+	public void enter_the_username(DataTable uname) throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
-	   
-	WebElement username = driver.findElement(By.xpath(objectrepo.getProperty("username")));
-		
+	    // For automatic transformation, change DataTable to one of
+	    // List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
+	    // E,K,V must be a scalar (String, Integer, Date, enum etc)
+		List<List<String>> user = uname.raw() ;
+		String usernamedata = user.get(0).get(0);
+		WebElement username = driver.findElement(By.xpath(objectrepo.getProperty("username")));
 		username.sendKeys(usernamedata);
+		
+	    
 	}
-	@When("^Enter the password	\"([^\"]*)\"$")
-	public void enter_the_password(String password) throws Throwable {
+
+	@When("^Enter the password$")
+	public void enter_the_password(DataTable password) throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
-		WebElement pword = driver.findElement(By.xpath(objectrepo.getProperty("pword")));
-		pword.sendKeys(password);
+	    // For automatic transformation, change DataTable to one of
+	    // List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
+	    // E,K,V must be a scalar (String, Integer, Date, enum etc)
+		List<List<String>> pwd = password.raw();
+		String passworddata = pwd.get(0).get(0);
+		WebElement passwordname = driver.findElement(By.xpath(objectrepo.getProperty("pword")));
+		passwordname.sendKeys(passworddata);
+	    
 	}
+
 	@When("^Customername \"([^\"]*)\"$")
 	public void customername(String cname) throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
@@ -168,6 +202,66 @@ public class Implementation {
 	    // Write code here that turns the phrase above into concrete actions
 		WebElement zip = driver.findElement(By.xpath(objectrepo.getProperty("zip")));
 		zip.sendKeys(zipcode);
+	}
+	@When("^Customername$")
+	public void customername(DataTable cname1) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    // For automatic transformation, change DataTable to one of
+	    // List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
+	    // E,K,V must be a scalar (String, Integer, Date, enum etc)
+		List<List<String>> cusname = cname1.raw();
+		String cusdata = cusname.get(0).get(0);
+		WebElement customername1 = driver.findElement(By.xpath(objectrepo.getProperty("customername")));
+		customername1.sendKeys(cusdata);
+	    
+	}
+
+	@When("^Street$")
+	public void street(DataTable street1) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    // For automatic transformation, change DataTable to one of
+	    // List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
+	    // E,K,V must be a scalar (String, Integer, Date, enum etc)
+		List<List<String>> st = street1.raw();
+		String streetdata = st.get(0).get(0);
+		WebElement streetname = driver.findElement(By.xpath(objectrepo.getProperty("street")));
+		streetname.sendKeys(streetdata);
+	}
+
+	@When("^City$")
+	public void city(DataTable city1) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    // For automatic transformation, change DataTable to one of
+	    // List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
+	    // E,K,V must be a scalar (String, Integer, Date, enum etc)
+		List<List<String>> ct = city1.raw();
+		String citydata = ct.get(0).get(0);
+		WebElement cityname = driver.findElement(By.xpath(objectrepo.getProperty("city")));
+		cityname.sendKeys(citydata);
+	}
+
+	@When("^State$")
+	public void state(DataTable state1) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    // For automatic transformation, change DataTable to one of
+	    // List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
+	    // E,K,V must be a scalar (String, Integer, Date, enum etc)
+		List<List<String>> stt = state1.raw();
+		String statedata = stt.get(0).get(0);
+		WebElement statename = driver.findElement(By.xpath(objectrepo.getProperty("state")));
+		statename.sendKeys(statedata);
+	}
+
+	@When("^Zip$")
+	public void zip(DataTable zip1) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    // For automatic transformation, change DataTable to one of
+	    // List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
+	    // E,K,V must be a scalar (String, Integer, Date, enum etc)
+		List<List<String>> zips = zip1.raw();
+		String zipdata = zips.get(0).get(0);
+		WebElement zipname = driver.findElement(By.xpath(objectrepo.getProperty("zip")));
+		zipname.sendKeys(zipdata);
 	}
 
 
